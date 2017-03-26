@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <!--<script src="vue.js"></script>-->
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/vue/1.0.26/vue.min.js"></script>
+    <script src="vue-resource.js"></script>
+    <script src="http://127.0.0.1/jquery/jquery.min.js"></script>
+</head>
+<body>
+    <div class="dd">
+        {{ name | uppercase }}
+        <div @click="">666</div>
+        <button @click="getData()">点我点我</button>
+        <button @click="getjson()">jsonp</button>
+        <p>{{a}}</p>
+        <div v-redword>{{b}}</div>
+        <ul>
+            <li v-for="item in arr | orderBy -1 " >{{item }}</li>
+        </ul>
+        <button @click="add">
+            点我加一个
+        </button>
+    </div>
+    <script>
+        Vue.filter('uppercase', function (val) {
+            return val.toUpperCase();
+        })
+        Vue.directive('redword', function () {
+            this.el.style.background = 'red'
+        })
+        var vm = new Vue({
+            el: '.dd',
+            data: {
+                name: 'xiang',
+                a: 1,
+                arr: [
+                    'apple',
+                    'oragne',
+                    'xigua',
+                    'banana'
+                ]
+            },
+            computed: {
+                b: function () {
+                    return this.a
+                }
+            },
+            mounted: function () {
+                var vm = this;
+              setInterval(function () {
+                  vm.a ++
+              },1000)
+            },
+            name: 'xiang',
+            methods: {
+                add: function () {
+                  this.arr.push('小明')
+                },
+                getjson: function () {
+                  $.ajax({
+                      url: 'https://sp0.baidu.com/5a1Fazu8AA54nxGko9WTAnF6hhy/su?',
+                      type: 'GET',
+                      data: {
+                        wd: '刘'
+                      },
+                      dataType: 'jsonp',
+                      jsonp: 'cb',
+                      success: function (res) {
+                          console.log(res,'res')
+                      }
+                  })
+                },
+                getData: function () {
+                    $.get('get.php',{a:22,b: 55}).then(function (res) {
+                        console.log(res,'success')
+                    }, function (res) {
+                        console.log(res,'error')
+                    })
+                }
+            }
+        })
+
+
+    </script>
+</body>
+</html>

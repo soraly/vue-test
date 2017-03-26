@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src="http://cdnjs.cloudflare.com/ajax/libs/vue/1.0.26/vue.min.js"></script>
+	<style>
+	</style>
+	<script>
+        window.onload = function () {
+            var Aaa=Vue.extend({
+                template:'<h3>我是标题3</h3>'
+            });
+
+            Vue.component('aaa',Aaa);
+
+
+            var vm=new Vue({
+
+                data:{
+                    bSign:true
+                }
+            }).$mount('#box')
+        }
+
+	</script>
+</head>
+<body>
+	<div id="box">
+		<aaa></aaa>
+	</div>
+
+
+</body>
+</html>
