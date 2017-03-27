@@ -11,15 +11,33 @@
             var hello = Vue.extend({
                 template: '<h3>this is hello!!</h3>'
             })
-            Vue.component('haha',hello)
+//            Vue.component('haha',hello)
+            Vue.component('xiang',{
+                template:'<h3>this is xiangs</h3>'
+            })
             var vm = new Vue({
                 data: {
                     name: 'xiang',
-                    mark: true
+                    mark: true,
+                    val: 'hhhh'
                 },
                 methods: {
                     toggle(){
                         this.mark = !this.mark;
+                    }
+                },
+                components: {
+                    'hhhh' : hello,
+                    'test': {
+                        template: '<h3>this is test</h3>'
+                    },
+                    'temp1': {
+                        data(){
+                          return {
+                              name:'xiaomi'
+                          }
+                        },
+                        template: '#eat'
                     }
                 }
             }).$mount('#dd');
@@ -49,7 +67,20 @@
         {{name}}
         <input type="button" @click='toggle()' value="按钮">
         <div id="d1" v-show="mark" transition="fade"></div>
-        <haha></haha>
+        <test></test>
+        <temp1></temp1>
+        <input type="button" value="dianwo1" @click="val='hhhh'">
+        <input type="button" value="dianwo1" @click="val='temp1'">
+        <component :is="val"></component>
     </div>
+
+    <template id="eat">
+        <h3>{{name}}准备吃饭去</h3>
+        <ul>
+            <li>2</li>
+            <li>3</li>
+            <li>4</li>
+        </ul>
+    </template>
 </body>
 </html>

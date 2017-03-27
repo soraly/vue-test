@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>$Title$</title>
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+    <!--<script src="vue.js"></script>-->
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/vue/1.0.26/vue.min.js"></script>
+    <script>
+        window.onload = function () {
+            var hello = Vue.extend({
+                template: '<h3>this is hello!!</h3>'
+            })
+//            Vue.component('haha',hello)
+            Vue.component('xiang',{
+                template:'<h3>this is xiangs</h3>'
+            })
+            var vm = new Vue({
+                data: {
+                    name: 'xiang',
+                    mark: true
+                },
+                methods: {
+                    toggle(){
+                        this.mark = !this.mark;
+                    }
+                },
+                components: {
+                    'hhhh' : {
+                        template: 'this is hahahah'
+                    }
+                }
+            }).$mount('#dd');
+
+        }
+    </script>
+    <style>
+        #d1 {
+            width: 100px;
+            height: 100px;
+            background: skyblue;
+        }
+        .fade-transition {
+            transition: 1s all ease;
+        }
+        .fade-enter {
+            opacity: 0;
+        }
+        .fade-leave {
+            opacity: 0;
+            transform: translate(300px,300px);
+        }
+    </style>
+</head>
+<body>
+<div id="dd">
+    {{name}}
+    <input type="button" @click='toggle()' value="按钮">
+    <div id="d1" v-show="mark" transition="fade"></div>
+    <xiang></xiang>
+    <hhhh></hhhh>
+</div>
+</body>
+</html>
