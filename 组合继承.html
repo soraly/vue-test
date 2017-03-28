@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="Generator" content="EditPlus®">
+  <meta name="Author" content="">
+  <meta name="Keywords" content="">
+  <meta name="Description" content="">
+  <script type="text/javascript" src='http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js'></script>
+  <script type="text/javascript" src=' http://apps.bdimg.com/libs/angular.js/1.4.6/angular.min.js'></script>
+  <link rel="stylesheet" href="http://apps.bdimg.com/libs/bootstrap/3.2.0/css/bootstrap.min.css">
+  <title>Document</title>
+ </head>
+ <body>
+
+ <script>
+	function Parent(name){
+		this.name = name;
+		this.fruit = ['apple','banana'];
+	}
+	Parent.prototype.sayHello = function(){
+		alert('hello 都市水乡!!')
+	}
+	function Child(name){
+		Parent.call(this,name)
+	}
+	Child.prototype = new Parent();
+	var man1 = new Child('xiang');	
+	man1.fruit.push('orange')
+	console.log(man1,'11')	
+	console.log(man1.sayHello,'sayHello')
+	
+	var man2 = new Child('fenfen');
+	console.log(man2,'22');
+	console.log(man1.fruit == man2.fruit)
+	console.log(man1.sayHello == man2.sayHello)
+ </script>
+ </body>
+</html>

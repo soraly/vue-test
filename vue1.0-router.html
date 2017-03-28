@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/vue/1.0.26/vue.min.js"></script>
+    <script src="vue-router.js"></script>
+</head>
+<body>
+    <div id="box">
+        <ul>
+            <li><a v-link="{path:'/home/xiang/id/1027'}">home</a></li>
+            <li><a v-link="{path:'/second'}">second</a></li>
+        </ul>
+
+        <router-view></router-view>
+    </div>
+
+    <script>
+        //1. 准备一个根组件
+        var vm = Vue.extend();
+        //2. Home second组件
+        var home = Vue.extend({
+            template: '<div>this is home {{$route.params | json }} </div>'
+        })
+        var second = Vue.extend({
+            template: '<div>this is second </div>'
+        })
+        //3. 准备路由
+        var router = new VueRouter();
+        //4. 配置路由
+        router.map({
+            'home/:name/id/:id': {
+                component: home
+            },
+            'second': {
+                component: second
+            }
+        })
+        //5. 启动路由
+        router.start(vm,'#box');
+        //6. 默认路由跳转
+        router.redirect({
+            '/': 'second'
+        })
+    </script>
+</body>
+</html>

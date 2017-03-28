@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <title>$Title$</title>
     <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
-    <!--<script src="vue.js"></script>-->
-    <script src="http://cdnjs.cloudflare.com/ajax/libs/vue/1.0.26/vue.min.js"></script>
+    <script src="vue.js"></script>
+    <!--<script src="http://cdnjs.cloudflare.com/ajax/libs/vue/1.0.26/vue.min.js"></script>-->
     <script>
         window.onload = function () {
             var hello = Vue.extend({
@@ -28,8 +28,27 @@
                 },
                 components: {
                     'hhhh' : hello,
+                    'props': {
+                        template: '#prop',
+                        data(){
+                          return {
+                              time: new Date()
+                          }
+                        },
+                        components: {
+                            'prop-child': {
+                                props: ['chtime','lzxName'],
+                                template: '<div>hi,{{lzxName}}, this is prop-child{{chtime}}</div>'
+                            }
+                        }
+                    },
                     'test': {
-                        template: '<h3>this is test</h3>'
+                        template: '<h3>this is test<xiaomi></xiaomi></h3>',
+                        components: {
+                            'xiaomi': {
+                                template: '<div>this is 小咪</div> '
+                            }
+                        }
                     },
                     'temp1': {
                         data(){
@@ -72,15 +91,27 @@
         <input type="button" value="dianwo1" @click="val='hhhh'">
         <input type="button" value="dianwo1" @click="val='temp1'">
         <component :is="val"></component>
+        <props></props>
     </div>
+    <template id="prop">
+        <div>
+            这是传递数据的组件 {{time}}
+            <prop-child lzx-name="xiang" :chtime="time">
 
+            </prop-child>
+        </div>
+    </template>
     <template id="eat">
-        <h3>{{name}}准备吃饭去</h3>
-        <ul>
-            <li>2</li>
-            <li>3</li>
-            <li>4</li>
-        </ul>
+        <div>
+            <h3>{{name}}准备吃饭去</h3>
+            <ul>
+                <li>2</li>
+                <li>3</li>
+                <li>4</li>
+            </ul>
+        </div>
+
+
     </template>
 </body>
 </html>

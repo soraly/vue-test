@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="vue.js"></script>
+</head>
+<body>
+    <div id="box">
+        {{name}}
+        this is 父组件
+        <child-part v-on:send-data="getdata"></child-part>
+        <main2></main2>
+    </div>
+    <template id="ddd">
+        <div>
+            <h3>this is 子组件</h3>
+            <div>hello {{name}}</div>
+            <input type="button" @click="send()" value="子组件">
+
+        </div>
+    </template>
+    <script>
+        window.onload = function () {
+            var maninpart = Vue.extend({
+                template: '<h4>this is main part</h4>'
+            })
+
+            var vm = new Vue({
+                data: {
+                    name: 'xiang'
+                },
+                methods: {
+                    getdata: function (val) {
+                        console.log(val,'val')
+                    }
+                },
+                components: {
+                    'childPart': {
+                        data(){
+                          return {name:'xiaofen'}
+                        },
+                        methods: {
+                            send: function () {
+                                this.$emit('send-data',this.name)
+                            }
+                        },
+                        template: '#ddd'
+                    },
+                    'main2': maninpart
+                }
+            }).$mount('#box')
+        }
+    </script>
+</body>
+</html>

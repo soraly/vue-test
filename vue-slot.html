@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="vue.js"></script>
+</head>
+<body>
+    <div id="box">
+        {{name}}
+        <top>
+            <ul slot="ul-slot">
+                <li>111</li>
+                <li>222</li>
+                <li>333</li>
+            </ul>
+            <div slot="div-slot">this id div</div>
+            <span slot="span-slot">this is span</span>
+        </top>
+        <br><br><br>
+        <top></top>
+    </div>
+    <template id="top">
+        <div>
+            this is top
+            <slot name="div-slot">这是默认的情况</slot>
+            <slot name="span-slot">这是默认的情况2</slot>
+            <p>this id bottom</p>
+        </div>
+    </template>
+    <script>
+        var vm = new Vue({
+            el: '#box',
+            data: {
+                name: 'xiang'
+            },
+            components:{
+                top: {
+                    template: '#top'
+                }
+            }
+        })
+    </script>
+</body>
+</html>
